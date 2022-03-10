@@ -28,6 +28,19 @@ export default {
       this.$store.dispatch("auth/setUser", null);
       this.$router.push("/login");
     }
+  },
+  fetch({
+    store,
+    redirect
+  }) {
+    store.watch(
+      state => state.auth.currentUser,
+      (newUser, oldUser) => {
+        if (!newUser) {
+          return redirect("/login")
+        }
+      }
+    )
   }
 }
 </script>
